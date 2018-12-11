@@ -1,4 +1,4 @@
-#Methods vs class methods vs static methods
+#Special Methods
 
 class Employee:
 
@@ -19,24 +19,28 @@ class Employee:
 	def apply_raise(self):
 		self.pay = int(self.pay * self.raise_amount)
 		
-	@classmethod
-	def set_raise_amt(cls, amount):
-		cls.raise_amount = amount
+	def __repr__(self):
+		return "Employee('{}', '{}', {})".format(self.first, self.last, self.pay)
+
+	def __str__(self):
+		return '{} - {}'.format(self.fullname(), self.email)
 		
+	def __add__(self, other):
+		return self.pay + other.pay
+		
+	def __len__(self):
+		return len(self.fullname())
+
+
 emp_1 = Employee('Corey','Schafer',50000) 
 emp_2 = Employee('Test','User',60000)
 
-emp_1.raise_amount = 1.05
 
-# ~ print(Employee.raise_amount)
-# ~ print(emp_1.raise_amount)
-# ~ print(emp_2.raise_amount)
-		
-Employee.set_raise_amt(1.05)
+print(emp_1.__repr__())
+print(emp_1)
+print(emp_1 + emp_2)
+print(len(emp_1))
 
-# ~ print(Employee.raise_amount)
-# ~ print(emp_1.raise_amount)
-# ~ print(emp_2.raise_amount)
 
 
 
